@@ -13,14 +13,11 @@ async function handleRequest(request) {
         if (cookie && cookie.includes("index")) {
             cookie_variable = true;
         }
-    //Fetching the variant urls from the API
-    let api_resp = await url_request('https://cfw-takehome.developers.workers.dev/api/variants');
-    //Fetching urls of the variant by getting JSON response object
-    const variant_urls = await api_resp.json();
-    //Fetching the index of the variant either from the cookie or from random function
-    let variant_index = get_index_url(cookie);
-    //Fetching the webpage whose link is provided apart from variant index
-    let selected_variant_url = fetch_variant(variant_urls, variant_index);
+    let api_resp = await url_request('https://cfw-takehome.developers.workers.dev/api/variants');  //Fetching the variant urls from the API
+    const variant_urls = await api_resp.json();   //Fetching urls of the variant by getting JSON response object
+    let variant_index = get_index_url(cookie);    //Fetching the index of the variant either from the cookie or from random function
+    let selected_variant_url = fetch_variant(variant_urls, variant_index);    //Fetching the webpage whose link is provided apart from variant index
+    
     //Fetching response of the variant
     if (selected_variant_url) {
         let resp = await url_request(selected_variant_url);
